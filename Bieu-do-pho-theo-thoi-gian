@@ -1,0 +1,24 @@
+[x,Fs] = audioread('C:\Users\bapta\OneDrive\Computer\guitar_solo.wav');
+%sound(x,Fs);
+N=length(x);
+time=N/Fs;
+t_vec=0:time/(N-1):time;
+t_len=length(t_vec);
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+subplot(311)
+plot(t_vec,x);
+xlabel('Time (s)');
+ylabel('Amplitude');
+title('Input sequence')
+
+subplot(312); 
+plot(0:time/(N-1):time,abs(fft(x)));  
+xlabel('Frequency');
+ylabel('|X(k)|');
+title('Magnitude Response'); 
+
+subplot(313); 
+plot(0:time/(N-1):time,angle(fft(x)));
+xlabel('Frequency');
+ylabel('Phase');
+title('Phase Response'); 
