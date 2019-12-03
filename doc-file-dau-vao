@@ -1,0 +1,8 @@
+[x,Fs] = audioread('C:\Users\bapta\OneDrive\Computer\piano.wav');
+%sound(x,Fs);
+N=length(x);
+time=N/Fs;
+t_vec=0:time/(N-1):time;
+t_len=length(t_vec);
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
