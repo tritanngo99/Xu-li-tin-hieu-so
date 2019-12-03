@@ -1,0 +1,31 @@
+[x,Fs] = audioread('C:\Users\bapta\OneDrive\Computer\piano_verse.wav');
+%sound(x,Fs);
+N=length(x);
+time=N/Fs;
+t_vec=0:time/(N-1):time;
+t_len=length(t_vec);
+t=t_vec;
+Tx_max=0.02;
+%%%%
+figure(1);
+% tao tin hieu vao la tong 3 song sin: 500 Hz, 2000, va 3500 Hz
+%x = sin(2*pi*500*t) + sin(2*pi*2000*t) + sin(2*pi*3500*t);
+subplot(2,1,1);
+plot(t,x); 
+title('Tin hieu vao x[n]');
+xlabel('Thoi gian t (giay)');
+ylabel('Bien do');
+axis([0, Tx_max, min(x), max(x)]);
+%%%%%%%%%%%%%%%%%%%%
+figure(2);
+N = 10000; % do phan giai truc tan so w
+w = 0:pi/N:pi;
+F = w*Fs/(2*pi); % chuyen tu t/s goc w (radian) sang t/s thuc (Hz)
+
+X = freqz(x,1,w); % nhan duoc X(ejw)
+modX = abs(X)/Fs; % chia cho he so ti le fs
+subplot(3,1,1);
+plot(F,modX);grid;
+axis([0, Fs/200 , 0, max(modX)]);
+title ('Pho bien do tin hieu vao');
+xlabel('F(Hz)');
