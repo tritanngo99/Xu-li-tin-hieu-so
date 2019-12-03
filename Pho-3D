@@ -1,0 +1,16 @@
+%x-axis - time
+%y-axis - frequency
+%z-axis - amplitude
+%fft(magnitude) which is represented by the color intensity
+%NB : you need to know what is a STFT(short time fourier transform)
+%[y,Fs]=wavread('TEST2.wav');
+[y,fs] = audioread('C:\Users\bapta\OneDrive\Computer\flute.wav');
+window=hamming(512); % window with a size of 512 points
+noverlap = 256; %the noverlaps its the number of points for repeating the window
+nfft=1024 ; % size of the fft
+[S,F,T,P]=spectrogram(y,window,noverlap,nfft,fs,'yaxis');
+surf(T,F,10*log10(P),'edgecolor','none'); axis tight ; view(0,90);
+colormap(hot); %for the indexed colors there is hot hsv ...
+set(gca, 'clim',[-80 -30]);
+%clim its the limits of axes colors
+xlabel('Time (Seconds)') ; ylabel('Frequence Hz');
