@@ -1,0 +1,14 @@
+[x,Fs] = audioread('C:\Users\bapta\OneDrive\Computer\nhaccu\saxophone.wav');
+N=length(x);
+time=N/Fs;
+hx=fft(x);
+shx=fftshift(hx);
+f=[-N/2:N/2-1]/N;
+f=f*Fs;
+%Bieu dien pho 2 chieu %%
+figure(1)
+stem(f,abs(shx),'r')
+xlabel('Frequency in [-Fs/2,Fs/2]')
+ylabel('Magnitude of DFT(x)')
+axis([-Fs/2 Fs/2 0 inf]);
+grid
