@@ -1,0 +1,40 @@
+[x,Fs] = audioread('C:\Users\bapta\OneDrive\Computer\guitar_solo.wav');
+N=length(x);
+time=N/Fs;
+hx=fft(x);
+shx=fftshift(hx);
+f=[-N/2:N/2-1]/N;
+f=f*Fs;
+%f=f*Fs;
+%%Bieu dien pho 2 chieu %%
+% figure(1)
+% stem(f,abs(shx),'r')
+% xlabel('Frequency in [-Fs/2,Fs/2]')
+% ylabel('Magnitude of DFT(x)')
+% axis([-Fs/2 Fs/2 0 inf]);
+% grid
+%%Bieu dien pho 3 chieu %%
+t_vec=0:time/(N-1):time;
+m = 15;
+HX=zeros(m,N-m+1);
+%colvec=[2:5]';
+for i=1:N-m+1
+    hx_select=fft(x(i:i+m-1));
+    shx_select=fftshift(hx_select);
+    for j=1:m 
+        HX(j,i)=shx_select(j);
+    end
+end
+% plot(real(HX),imag(HX));
+% hold on
+% plot(real(HX),imag(HX),'*r');
+figure(1)
+colormap('Gray');
+ax=imagesc(t_vec,f,abs(HX));
+set(ax,'YDir','normal');
+
+
+
+
+
+
